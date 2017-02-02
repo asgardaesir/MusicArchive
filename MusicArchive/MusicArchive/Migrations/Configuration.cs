@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Web;
+using System.Web.Hosting;
 using CsvHelper;
 using MusicArchive.Models;
 
@@ -19,8 +23,8 @@ namespace MusicArchive.Migrations
         {
             #region Beherit
 
-            var beheritBandImage = File.ReadAllBytes(@"C:\Users\Brad\Documents\Visual Studio 2015\Projects\MusicArchive\images\beherit.jpg");
-            var beheritLogo = File.ReadAllBytes(@"C:\Users\Brad\Documents\Visual Studio 2015\Projects\MusicArchive\images\beherit_logo.jpg");
+            var beheritBandImage = File.ReadAllBytes(MapPath(@"~\seedData\beherit.jpg"));
+            var beheritLogo = File.ReadAllBytes(MapPath(@"~\seedData\beherit_logo.jpg"));
 
             var beherit = new Band
             {
@@ -48,7 +52,7 @@ namespace MusicArchive.Migrations
                 Type = "Full-length",
                 ReleaseDate = "November 13th, 1993",
                 Tracks = new List<Track>(),
-                Cover = File.ReadAllBytes(@"C:\Users\Brad\Documents\Visual Studio 2015\Projects\MusicArchive\images\drawingDownTheMoon.jpg"),
+                Cover = File.ReadAllBytes(MapPath(@"~\seedData\drawingDownTheMoon.jpg")),
                 CatalogId = "SPI 14"
             };
 
@@ -75,7 +79,7 @@ namespace MusicArchive.Migrations
                 Name = "Electric Doom Synthesis",
                 Type = "Full-length",
                 ReleaseDate = "June 6th, 1996",
-                Cover = File.ReadAllBytes(@"C:\Users\Brad\Documents\Visual Studio 2015\Projects\MusicArchive\images\electricDoomSynthesis.jpg")
+                Cover = File.ReadAllBytes(MapPath(@"~\seedData\electricDoomSynthesis.jpg"))
             };
 
             beherit.Albums.Add(electricDoomSynthesis);
@@ -146,7 +150,7 @@ namespace MusicArchive.Migrations
 
         private void LoadBlackSabbathAlbums(MusicArchiveContext context)
         {
-            using (var reader = new CsvReader(new StreamReader(@"C:\Users\Brad\Documents\Visual Studio 2015\Projects\MusicArchive\blackSabbathDisography.csv")))
+            using (var reader = new CsvReader(new StreamReader(MapPath(@"~\seedData\blackSabbathDisography.csv"))))
             {
                 var blackSabbath = context.Bands.Local.Single(band => band.Name == "Black Sabbath");
 
@@ -169,8 +173,8 @@ namespace MusicArchive.Migrations
                     " the reunion because of an \"un-signable contract\". On September 3rd, 2015, Black Sabbath announced that they will embark on their final tour," +
                     "titled \"The End\", from January to September 2016.";
 
-                blackSabbath.BandImage = File.ReadAllBytes(@"C:\Users\Brad\Documents\Visual Studio 2015\Projects\MusicArchive\images\BlackSabbath.jpg");
-                blackSabbath.BandLogo = File.ReadAllBytes(@"C:\Users\Brad\Documents\Visual Studio 2015\Projects\MusicArchive\images\BlackSabbath_Logo.jpg");
+                blackSabbath.BandImage = File.ReadAllBytes(MapPath(@"~\seedData\BlackSabbath.jpg"));
+                blackSabbath.BandLogo = File.ReadAllBytes(MapPath(@"~\seedData\BlackSabbath_Logo.jpg"));
 
 
                 blackSabbath.Albums = new List<Album>();
@@ -199,7 +203,7 @@ namespace MusicArchive.Migrations
 
         private void BulkLoadSeedDataFromCsv(MusicArchiveContext context)
         {
-            using (var reader = new CsvReader(new StreamReader(@"C:\Users\Brad\Documents\Visual Studio 2015\Projects\MusicArchive\BandSeedData.csv")))
+            using (var reader = new CsvReader(new StreamReader(MapPath(@"~\seedData\BandSeedData.csv"))))
             {
                 while (reader.Read())
                 {
@@ -219,6 +223,18 @@ namespace MusicArchive.Migrations
                     context.Bands.Add(band);
                 }
             }
+        }
+
+        private string MapPath(string seedFile)
+        {
+            if (HttpContext.Current != null)
+                return HostingEnvironment.MapPath(seedFile);
+
+            var localPath = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath;
+            var directoryName = Path.GetDirectoryName(localPath);
+            var path = Path.Combine(directoryName, ".." + seedFile.TrimStart('~').Replace('/', '\\'));
+
+            return path;
         }
     }
 }
