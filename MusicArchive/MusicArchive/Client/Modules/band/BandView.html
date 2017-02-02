@@ -1,0 +1,60 @@
+<div id="bandPage" ng-controller="bandPageController">
+    <div class="row">
+        <div class="col-md-9">
+            <h1>{{band.name}}</h1>
+            <div class="row panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <table>
+                            <tr><th>Country of origin:</th><td>{{band.countryOfOrgin}}</td></tr>
+                            <tr><th>Location:</th><td>{{band.location}}</td></tr>
+                            <tr><th>Status:</th><td>{{band.status}}</td></tr>
+                            <tr><th>Formed in:</th><td>{{band.formedIn}}</td></tr>
+                            <tr><th>Years active:</th><td>{{band.yearsActive}}</td></tr>
+                        </table>
+                    </div>
+                        <div class="col-md-6">
+                            <table>
+                            <tr><th>Genre:</th><td>{{band.genre}}</td></tr>
+                            <tr><th>Lyrical themes:</th><td>{{band.lyricalThemes}}</td></tr>
+                            <tr><th>Current label:</th><td>{{band.currentLabel}}</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row panel panel-default">
+                <div class="panel-body">
+                    {{band.description}}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <img id="bandImage" class="bandLogo" src={{band.bandLogo}} />
+            <img id="bandImage" class="bandImage" src={{band.bandImage}} />
+        </div>
+    </div>
+
+
+    <div class="panel with-nav-tabs ">
+    <uib-tabset active="active">
+        <uib-tab index="0" heading="Albums">
+            <table class="table table-responsive table-striped table-hover">
+                <tr><th></th><th>Name</th><th>Type</th><th>Year</th><th>Rating</th></tr> 
+                <tbody ng-repeat="album in band.albums">
+                    <tr><td><img class="albumListAlbumCover" src="{{album.cover}}" /></td><td><h3><a ui-sref-active="active" ng-click="goToAlbum(album.id)">{{album.name}}</h3></a></td><td>{{album.type}}</td><td>{{album.year}}</td><td>{{album.rating}}</td></tr>
+                </tbody>
+            </table>
+        </uib-tab>
+        <uib-tab index="1" heading="Members">
+            <div class="row">
+            </div>
+        </uib-tab>
+        <uib-tab index="2" heading="Videos">
+            <div class="row">
+            </div>
+        </uib-tab>
+    </uib-tabset>
+    </div>
+</div>

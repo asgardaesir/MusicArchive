@@ -1,0 +1,65 @@
+<div ng-controller="addBandController">
+    <row>
+            <div class="alert alert-danger alert-dismissible" role="alert">{{error}}</div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="BandName">Band Name:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="newBand.name" id="BandName" placeholder="Enter Band Name">
+                    </div>
+                </div>
+
+                <div id="AdvancedSearch">
+                    <div class="card card-block">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="Genre">Genre:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newBand.genre" id="Genre" placeholder="Enter Genre">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="YearOfFormation">Year of Formation:</label>
+                            <div class="col-sm-10">
+                            <input type="month" class="form-control" id="YearOfFormation" placeholder="Enter Year">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="Country">Country of Origin:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newBand.countryOfOrigin" id="Country" placeholder="Country of Origin">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="LyricalThemes"  placeholder="Lyrical Themes">Lyrical Themes:</label>
+                            <div class="col-sm-10">
+                                <tags-input ng-model="lyricalThemes"></tags-input>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="Label">Label:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" id="Label" placeholder="Label">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-primary" ng-click="addBand()"> Submit <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn" ng-click=""> Add album <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+
+            </form>
+        </row>
+</div>
