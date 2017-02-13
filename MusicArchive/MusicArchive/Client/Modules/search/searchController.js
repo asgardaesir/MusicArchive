@@ -2,7 +2,11 @@ var searchController = angular.module('searchController', ['angularSpinners']);
 searchController.controller('searchController', ['$scope','$location', 'searchApi', '$state', '$stateParams', 'spinnerService',
     function($scope, $location, searchApi, $state, $stateParams, spinnerService) {
 
+        $scope.currentPage = 0;
+
         $scope.search = function() {
+            $scope.bands;
+
             spinnerService.show('searchingSpinner');
             searchApi.get($scope.searchOptions, function(data) {
                 $scope.bands = data.searchResults;
@@ -23,6 +27,9 @@ searchController.controller('searchController', ['$scope','$location', 'searchAp
 
         $scope.getResultsForPage = function(page) {
             console.log('getting page: ' + page);
+            $scope.currentPage = page;
+            $scope.bands = undefined;
+
             spinnerService.show('searchingSpinner');
 
             $scope.searchOptions.startingRecordNumber = page * 50; // get page count from request!!

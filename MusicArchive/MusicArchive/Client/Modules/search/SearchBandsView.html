@@ -62,13 +62,14 @@
         </row>
     </div>
     <row>
-        <spinner name="searchingSpinner">
-            <img src="./img/ellipsis.gif" ></img>
+        <spinner class="spin" name="searchingSpinner">
+            <img class="spinner2" src="./img/ellipsis.gif" ></img>
         </spinner>
 
         <div ng-show="bands.length > 0">
             <div class="alert alert-info" role="alert">{{resultCount}} bands found matching search criteria</div>
 
+            <!-- todo turn this into a directive / controller -->
             <div class="searchNavigation">
                 <nav aria-label="Page navigation" >
                     <ul class="pagination">
@@ -78,8 +79,8 @@
                         </a>
                         </li>
                         
-                        <li ng-repeat="i in pageCount track by $index">
-                            <a ng-click="getResultsForPage($index+1)">{{$index+1}}</a>
+                        <li ng-repeat="i in pageCount track by $index" ng-class="{ 'active': $index == currentPage }">
+                            <a ng-click="getResultsForPage($index)">{{$index+1}}</a>
                         </li>
 
                         <li>
@@ -103,25 +104,28 @@
                 </tbody>
             </table>
 
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                    </li>
-                </ul>
-            </nav>
+            <!-- todo turn this into a directive / controller -->
+            <div class="searchNavigation">
+                <nav aria-label="Page navigation" >
+                    <ul class="pagination">
+                        <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        </li>
+                        
+                        <li ng-repeat="i in pageCount track by $index" ng-class="{ 'active': $index == currentPage }">
+                            <a ng-click="getResultsForPage($index)">{{$index+1}}</a>
+                        </li>
+
+                        <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
             
         </div>
         <div ng-show="bands.length == 0">

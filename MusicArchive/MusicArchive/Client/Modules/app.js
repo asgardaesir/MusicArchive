@@ -57,7 +57,8 @@ musicArchiveApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             yearOfFormation: '',
             countryOfOrigin: '',
             lyricalThemes: '',
-            label: ''
+            label: '',
+            startingRecordNumber: 0
         }
     };
 
