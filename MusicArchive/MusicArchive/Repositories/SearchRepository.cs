@@ -7,7 +7,7 @@ namespace MusicArchive.Repositories
 {
     public class SearchRepository : ISearchRepository
     {
-        public IEnumerable<Band> Search(BandSearchInformation bandSearchInformation)
+        public IEnumerable<Band> Search(BandSearchInformation bandSearchInformation, out int totalMatches)
         {
             using (var context = new MusicArchiveContext())
             {
@@ -35,7 +35,7 @@ namespace MusicArchive.Repositories
 
                 if (!string.IsNullOrWhiteSpace(bandSearchInformation.YearOfFormation))
                 {
-                    matches = matches.Where(band1 => band1.FormedIn == bandSearchInformation.YearOfFormation);
+                    matches = matches.Where(band1 => band1.FormedIn == bandSearchInformation.YearOfFormation); //TODO make this an actual date...
                 }
 
                 if (!string.IsNullOrWhiteSpace(bandSearchInformation.LyricalThemes))
@@ -43,7 +43,9 @@ namespace MusicArchive.Repositories
                     matches = matches.Where(band1 => band1.LyricalThemes == bandSearchInformation.LyricalThemes);
                 }
 
-                return matches.ToList();
+                totalMatches = matches.Count();
+
+                return matches.OrderBy(band => band.Name).Skip(bandSearchInformation.StartingRecordNumber).Take(bandSearchInformation.PageSize).ToList();
             }
 
         }

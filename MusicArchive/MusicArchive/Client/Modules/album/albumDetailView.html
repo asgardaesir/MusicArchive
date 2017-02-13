@@ -21,25 +21,25 @@
 					<div class="row"><strong>Format:</strong> {{album.format}}</div>
 					<div class="row"><strong>Reviews:</strong> {{album.reviewAverage}} / 5</div>
 				</div>
-				
-				<!--<div class="col-md-4">
-					<img class="albumDetailAlbumArt" src="{{album.albumArt}}" />
-				</div>-->
 			</div>
 		</div>
 	</div>
 
-	<div class="row">
-		<h3>Track listing</h3>
+	<div class="row">	
 		<div class="col-sm-9 panel with-nav-tabs ">
-			<table class="table">
-				<tr><th>Track Number</th><th>Name</th><th>Length</th></tr>
-				<tr ng-repeat="track in album.tracks"><td>{{track.trackNumber}}</td><td>{{track.name}}</td><td>{{track.length}}</td><td>{{track.lyrics}}</td></tr>
-			</table>
+			<div class="panel panel-default">
+				<div class="panel-heading">Track listing</div>
+				<table class="table">
+					<tr><th>Track Number</th><th>Name</th><th>Length</th></tr>
+					<tr ng-repeat="track in album.tracks"><td>{{track.trackNumber}}</td><td>{{track.name}}</td><td>{{track.length}}</td><td>{{track.lyrics}}</td></tr>
+				</table>
+			</div>
 		</div>
+
 		<div class="col-sm-3">
 			<img class="img-responsive" src="{{album.albumArt}}" />
 		</div>
+		
 	</div>
 
 	<div class="row">

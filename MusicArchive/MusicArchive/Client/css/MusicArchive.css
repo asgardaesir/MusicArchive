@@ -190,9 +190,9 @@ body {
 	color: #bf3604;
 }
 
-#statPie{
-    width: 200px;
-    height: 200px;
+#statPie {
+    width: 33.3%;
+    height: 33.3%;
 }
 
 /*----------------------------------------------*/
@@ -201,4 +201,22 @@ body {
     width: 250px;
     height: 250px;
     float:right;
+}
+
+.active {
+    background-color: #EEE
+}
+
+.spinner{
+    position: absolute;
+    display: block;
+    top: 500%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.searchNavigation{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

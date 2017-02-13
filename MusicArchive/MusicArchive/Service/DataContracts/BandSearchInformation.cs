@@ -14,5 +14,7 @@ namespace MusicArchive
         public string LyricalThemes { get; set; }
         public string Genre { get; set; }
         public string YearOfFormation { get; set; }
+        public int PageSize { get; set; }
+        public int StartingRecordNumber { get; set; }
     }
 }

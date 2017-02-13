@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using MusicArchive.Controllers;
 using MusicArchive.Models;
 
-namespace MusicArchive.Repositories
+namespace MusicArchive
 {
     public interface ISearchRepository
     {
-        IEnumerable<Band> Search(BandSearchInformation bandSearchInformation);
+        IEnumerable<Band> Search(BandSearchInformation bandSearchInformation, out int totalMatches);
     }
 }

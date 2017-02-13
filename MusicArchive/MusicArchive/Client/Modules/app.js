@@ -16,7 +16,8 @@ var musicArchiveApp = angular.module('MusicArchiveApp',
         'menuController',
         'albumDetailController',
         'chart.js',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'angularSpinners'
     ]
 );
 
@@ -49,18 +50,25 @@ musicArchiveApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
         url: '/search',
         templateUrl: './modules/search/SearchBandsView.html',
         controller: 'bandListController',
-         params: {
-            id: null
+        params: {
+            id: null,
+            bandName : '',
+            genre: '',
+            yearOfFormation: '',
+            countryOfOrigin: '',
+            lyricalThemes: '',
+            label: ''
         }
     };
 
     var viewBandState = {
         name: 'viewBand',
-        url: '/viewBand',
+        url: '/Band/:id',
         templateUrl: './modules/band/bandView.html',
         controller: 'bandPageController',
         params: {
-            id: null
+            id: null,
+            
         }
     };
 
@@ -73,7 +81,7 @@ musicArchiveApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
 
     var albumViewState = {
         name: 'viewAlbum',
-        url: '/viewAlbum',
+        url: '/Album/:id',
         templateUrl: './modules/album/albumDetailView.html',
         controller: 'albumDetailController',
         params: {

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
 using AutoMapper;
 using MusicArchive.Models;
@@ -17,8 +16,10 @@ namespace MusicArchive.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<BandSearchRowDto> Search([FromUri]string bandName, [FromUri]string countryOfOrigin, [FromUri]string label, [FromUri]string lyricalThemes, [FromUri]string genre, [FromUri]string yearOfFormation)
+        public BandSearchResultsDto Search([FromUri]string bandName, [FromUri]string countryOfOrigin, [FromUri]string label, [FromUri]string lyricalThemes, [FromUri]string genre, [FromUri]string yearOfFormation, [FromUri]int startingRecordNumber)
         {
+            int totalMatches;
+
                 var results = _searchRepository.Search(new BandSearchInformation
                 {
                     BandName = bandName,
@@ -26,10 +27,13 @@ namespace MusicArchive.Controllers
                     Label = label,
                     Genre = genre,
                     LyricalThemes = lyricalThemes,
-                    YearOfFormation = yearOfFormation
-                });
+                    YearOfFormation = yearOfFormation,
+                    PageSize = 50,
+                    StartingRecordNumber = startingRecordNumber
+                }, out totalMatches);
 
-            return results.ToList().Select(Mapper.Map<Band, BandSearchRowDto>);
+            var searchResults = results.Select(Mapper.Map<Band, BandSearchRowDto>).ToList();
+            return new BandSearchResultsDto(totalMatches, searchResults);
         }
     }
 }

@@ -3,23 +3,39 @@
 
     <div class="row">
         <div class="row col-md-4">
-            <h2>Bands By Status</h2>
-            <canvas id="statPie" class="chart chart-pie" chart-data="dataByStatus" chart-labels="labelsByStatus"> chart-series="series"
-            </canvas>
+            <div>
+                <div>
+                    <h2>Bands By Status</h2>
+                </div>
+                <spinner name="dashboardStatusSpinner">
+                    <img class="spinner" src="./img/ellipsis.gif" ></img>
+                </spinner>
+
+                <canvas ng-show="labelsByStatus" id="statPie" class="chart chart-pie" chart-data="dataByStatus" chart-click="StatusSearch" chart-labels="labelsByStatus"> chart-series="series"
+                </canvas>
+            </div>
         </div>
 
         <div class="row col-md-4">
-            <h2>Bands By Genre</h2>
-            
-            <canvas id="statPie" class="chart chart-pie" chart-data="dataByGenre" chart-labels="labelsByGenre"> chart-series="series"
-            </canvas>
+            <div>
+                <h2>Bands By Genre</h2>
+                <spinner name="dashboardGenreSpinner">
+                    <img class="spinner" src="./img/ellipsis.gif" ></img>
+                </spinner>
+                <canvas ng-show="labelsByGenre" id="statPie" class="chart chart-pie" chart-data="dataByGenre" chart-click="GenreSearch" chart-labels="labelsByGenre"> chart-series="series"
+                </canvas>
+            </div>
         </div>
 
         <div class="row col-md-4">
-            <h2>Bands By Country</h2>
-            <canvas id="statPie" class="chart chart-pie" chart-data="dataByCountry" chart-labels="labelsByCountry"> chart-series="series"
-            </canvas>
+            <div>
+                <h2>Bands By Country</h2>
+                <spinner name="dashboardCountrySpinner">
+                    <img class="spinner" src="./img/ellipsis.gif" ></img>
+                </spinner>
+                <canvas  ng-show="labelsByCountry" id="statPie" class="chart chart-pie" chart-data="dataByCountry" chart-click="CountrySearch" chart-labels="labelsByCountry"> chart-series="series"
+                </canvas>
+            </div>
         </div>
-
     </div>
 </div>
